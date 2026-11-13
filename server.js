@@ -2,13 +2,15 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const crypto = require('crypto');
-
+const path = require('path');
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 const PORT = process.env.PORT || 3000;
-app.use(express.static('public'));
-
+app.use(express.static(__dirname));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 const STARTING_COINS = 10000;
 const INITIAL_SECONDS = 20;
 const ANTI_SNIPE_SECONDS = 10;
