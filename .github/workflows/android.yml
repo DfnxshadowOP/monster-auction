@@ -29,6 +29,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Prepare web directory
+        run: |
+          mkdir -p www
+          echo "<html><body>Monster Auction</body></html>" > www/index.html
+
       - name: Build Android project
         run: |
           npm install @capacitor/android
