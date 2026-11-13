@@ -1,7 +1,7 @@
 {
   "appId": "com.shadowhubs.monsterauction",
   "appName": "Monster Auction",
-  "webDir": ".",
+  "webDir": "www",
   "server": {
     "url": "https://monster-auction.onrender.com",
     "cleartext": false,
