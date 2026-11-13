@@ -60,3 +60,5 @@ button,input{font:inherit}button{min-height:44px;touch-action:manipulation}input
  .toast{bottom:calc(18px + env(safe-area-inset-bottom));width:max-content;max-width:calc(100vw - 28px);text-align:center}
 }
 @media(max-width:360px){.live-pill{display:none}.pokemon-info h2{font-size:19px}.timer{font-size:23px}.bid-controls button{font-size:9px;padding-inline:9px}.players-list{grid-template-columns:1fr}}
+
+.leaderboard-panel{padding:19px 20px;margin-top:17px}.leaderboard-panel h3{font-size:17px;margin:6px 0 13px}.leaderboard-list{display:flex;flex-direction:column;gap:8px}.leader-row{display:flex;justify-content:space-between;gap:8px;align-items:center;background:#1c2431;border-radius:8px;padding:11px;font-size:11px}.leader-row:first-child{border:1px solid #c5f36b;color:#d9f7a2}.leader-row span{font:10px 'DM Mono',monospace;color:#aab4c4;text-align:right}

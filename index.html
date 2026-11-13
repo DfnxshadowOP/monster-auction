@@ -28,17 +28,17 @@
         </div>
       </section>
       <section id="game" class="hidden">
-        <div class="room-bar panel"><div><div class="eyebrow">PRIVATE AUCTION ROOM</div><strong>ROOM <span id="roomCodeLabel">------</span></strong></div><button id="copyBtn" class="secondary small">COPY CODE</button><div class="round-label">ROUND <b id="roundNumber">0</b><span id="roundTotal"> / 10</span></div></div>
+        <div class="room-bar panel"><div><div class="eyebrow">PRIVATE AUCTION ROOM</div><strong>ROOM <span id="roomCodeLabel">------</span></strong></div><button id="copyBtn" class="secondary small">COPY CODE</button><div class="round-label">ROUND <b id="roundNumber">0</b><span id="roundTotal"> / 15</span></div></div>
         <div class="game-grid">
           <section class="auction panel"><div class="auction-top"><span class="eyebrow">NOW UP FOR AUCTION</span><span id="auctionStatus" class="status">WAITING</span></div>
             <div id="pokemonArt" class="pokemon-art"><div class="orb">?</div></div>
             <div class="pokemon-info"><div><div id="pokemonRarity" class="rarity">—</div><h2 id="pokemonName">Waiting for players</h2><p id="pokemonType">The host can start when 2 players have joined.</p></div><div class="timer-wrap"><div class="eyebrow">TIME LEFT</div><div id="timer" class="timer">--</div></div></div>
             <div class="bid-strip"><div><div class="eyebrow">CURRENT HIGHEST BID</div><strong id="highestBid">0 <small>COINS</small></strong><p id="highestBidder">No bids yet</p></div><div class="bid-controls"><input id="bidAmount" type="number" min="100" step="100" placeholder="Your bid"><button id="bidBtn" class="primary">PLACE BID ↗</button></div></div>
             <div id="gameMessage" class="game-message">Create a room and invite your friends.</div>
-            <div class="host-controls"><button id="startBtn" class="primary hidden">START 10-ROUND AUCTION →</button><span id="autoNote" class="auto-note">Automatic rounds · 5-second break · Unsold Pokémon skip automatically</span></div>
+            <div class="host-controls"><button id="startBtn" class="primary hidden">START 15-ROUND AUCTION →</button><span id="autoNote" class="auto-note">Automatic rounds · 5-second break · Unsold Pokémon skip automatically</span></div>
           </section>
           <aside class="side-column"><section class="panel players-panel"><div class="section-heading"><div><div class="eyebrow">THE COMPETITION</div><h3>Players <span id="playerCount">0/8</span></h3></div><span class="players-icon">♟</span></div><div id="playersList" class="players-list"></div></section>
-            <section class="panel collection-panel"><div class="eyebrow">YOUR COLLECTION</div><h3>Pokémon secured</h3><div id="collectionList" class="collection-list"><p class="muted">Win your first auction to add a Pokémon here.</p></div></section><section class="panel history-panel"><div class="eyebrow">AUCTION LOG</div><h3>Recent results</h3><div id="historyList" class="history-list"><p class="muted">Auction results will appear here.</p></div></section></aside>
+            <section class="panel collection-panel"><div class="eyebrow">YOUR COLLECTION</div><h3>Pokémon secured</h3><p id="powerHint" class="muted">Pokémon power stays hidden until all auctions finish.</p><div id="collectionList" class="collection-list"><p class="muted">Win your first auction to add a Pokémon here.</p></div></section><section class="panel history-panel"><div class="eyebrow">AUCTION LOG</div><h3>Recent results</h3><div id="historyList" class="history-list"><p class="muted">Auction results will appear here.</p></div></section><section id="leaderboardPanel" class="panel leaderboard-panel hidden"><div class="eyebrow">FINAL POWER REVEAL</div><h3>🏆 Final leaderboard</h3><div id="leaderboardList" class="leaderboard-list"></div></section></aside>
         </div>
       </section>
     </main>

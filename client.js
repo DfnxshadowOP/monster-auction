@@ -36,7 +36,7 @@ function render() {
   if (state.auction) {
     const p = state.auction.pokemon;
     $('pokemonName').textContent = p.name;
-    $('pokemonType').textContent = `${p.type} type · Starting bid ${p.base.toLocaleString()} coins`;
+    $('pokemonType').textContent = `${p.type} type · Starting bid ${p.base.toLocaleString()} coins · POWER HIDDEN`;
     $('pokemonRarity').textContent = p.rarity;
     $('pokemonRarity').className = `rarity ${p.rarity.toLowerCase()}`;
     $('pokemonArt').innerHTML = `<div class="art-glow"></div><img class="pokemon-image" alt="${escapeHtml(p.name)}" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${p.id}.png" onerror="this.outerHTML='<div class=\'orb revealed\'>${rarityEmoji(p.rarity)}</div>'">`;
@@ -54,9 +54,12 @@ function render() {
   }
   $('playersList').innerHTML = state.players.map(p => `<div class="player-row"><div class="avatar">${escapeHtml(p.name.slice(0,1).toUpperCase())}</div><div class="player-name">${escapeHtml(p.name)} ${p.id === myId ? '<span class="you">YOU</span>' : ''} ${p.id === state.hostId ? '<span class="you">HOST</span>' : ''}</div><div class="player-coins">${p.coins.toLocaleString()} ◈</div></div>`).join('');
   const me = state.players.find(p => p.id === myId);
-  $('collectionList').innerHTML = me && me.collection.length ? me.collection.map(p => `<div class="collection-item"><span>${escapeHtml(p.name)} <small>· ${escapeHtml(p.rarity)}</small></span><span>${p.paid.toLocaleString()} ◈</span></div>`).join('') : '<p class="muted">Win your first auction to add a Pokémon here.</p>';
+  $('powerHint').textContent = state.status === 'complete' ? 'Power revealed! Your final score is the sum of your Pokémon power.' : 'Pokémon power stays hidden until all auctions finish.';
+  $('collectionList').innerHTML = me && me.collection.length ? me.collection.map(p => `<div class="collection-item"><span>${escapeHtml(p.name)} <small>· ${escapeHtml(p.rarity)}</small>${state.status === 'complete' ? `<small> · POWER ${p.power}</small>` : ''}</span><span>${p.paid.toLocaleString()} ◈</span></div>`).join('') : '<p class="muted">Win your first auction to add a Pokémon here.</p>';
+  $('leaderboardPanel').classList.toggle('hidden', state.status !== 'complete');
+  $('leaderboardList').innerHTML = state.leaderboard && state.leaderboard.length ? state.leaderboard.map((p,i) => `<div class="leader-row"><b>#${i+1} ${escapeHtml(p.name)}</b><span>${p.score.toLocaleString()} POWER · ${p.count} Pokémon</span></div>`).join('') : '';
   $('historyList').innerHTML = state.history && state.history.length ? state.history.map(item => `<div class="history-item"><span><b>${escapeHtml(item.name)}</b><small>${escapeHtml(item.rarity)}</small></span><span class="${item.result === 'SOLD' ? 'sold' : 'unsold'}">${item.result === 'SOLD' ? `${escapeHtml(item.winner)} · ${item.price.toLocaleString()} ◈` : 'UNSOLD'}</span></div>`).join('') : '<p class="muted">Auction results will appear here.</p>';
-  $('autoNote').textContent = state.status === 'break' ? `Next Pokémon in ${state.breakSecondsLeft}s · Automatically continuing` : state.status === 'complete' ? 'All 10 rounds finished.' : 'Automatic rounds · 5-second break · Unsold Pokémon skip automatically';
+  $('autoNote').textContent = state.status === 'break' ? `Next Pokémon in ${state.breakSecondsLeft}s · Automatically continuing` : state.status === 'complete' ? 'All 15 rounds finished. Final power reveal is complete.' : 'Power is hidden · Random Pokémon each round · 5-second break';
 }
 function rarityEmoji(rarity) { return ({Common:'⭐',Rare:'✨',Epic:'💎',Legendary:'👑'})[rarity] || '⚡'; }
 function escapeHtml(value) { return String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }

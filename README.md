@@ -1,48 +1,43 @@
-# Monster Auction — Mobile PWA
+# Monster Auction V0.5 — Mobile app setup
 
-A mobile-first, installable browser game for private multiplayer Pokémon auctions. Uses virtual coins only.
+This package keeps the V0.4 web game and adds a Capacitor wrapper configuration for Android and iOS. The current game server remains hosted on Render; the native app connects to that online server, so friends can play together over the internet.
 
-## Run locally
+## Game scoring choice
 
-1. Install Node.js 18+.
-2. In this folder run `npm install`.
-3. Run `npm start`.
-4. Open `http://localhost:3000`.
+The selected scoring system is one combined power score per Pokémon. The score must remain hidden from players throughout bidding and only be revealed after the final auction round. The final winner is the player with the highest sum of the power scores of all Pokémon they won.
 
-For local multiplayer testing, open the URL on multiple devices connected to the same Wi-Fi (use your computer's LAN IP on the other devices). For friends outside your network, deploy this Node.js server to a host that supports persistent WebSocket connections, then open the HTTPS URL on mobile.
+## Web deployment
 
-## Install on Android
+Keep using the existing Render service. The server's `npm start` command is unchanged. If you replace the GitHub `package.json`, run a new Render deploy after committing it.
 
-1. Open the deployed HTTPS website in Chrome.
-2. Tap the **Install app** prompt/button, or Chrome menu → **Install app** / **Add to Home screen**.
-3. Launch Monster Auction from your home screen.
+## Android app build
 
-## Install on iPhone
+Requirements: a computer with Node.js LTS, Android Studio, and Android SDK installed.
 
-1. Open the deployed HTTPS website in Safari.
-2. Tap Share → **Add to Home Screen**.
+1. Extract this project and open a terminal in its folder.
+2. Run `npm install`.
+3. Run `npx cap add android` (only once).
+4. Run `npx cap sync android`.
+5. Run `npx cap open android`.
+6. In Android Studio, test on a device/emulator. For a distributable APK: Build > Build Bundle(s) / APK(s) > Build APK(s). For Google Play, generate a signed Android App Bundle (AAB).
 
-## PWA details
+The Android app loads `https://monster-auction.onrender.com`; the Render service must be live and use HTTPS.
 
-- Web app manifest with standalone display and portrait orientation.
-- App icons (192×192 and 512×512) and Apple touch icon.
-- Service worker caches the app shell for repeat visits/offline shell access.
-- Live auctions still require an internet connection and an active server.
+## iOS app build
 
-## Gameplay
+Requirements: a Mac with Xcode and an Apple Developer account for TestFlight/App Store distribution.
 
-- Create a private room and share its six-character code.
-- 2–8 players, 10,000 virtual coins each.
-- Host starts a 10-round auction.
-- Weighted rarity selection: Common 50%, Rare 30%, Epic 15%, Legendary 5%.
-- 20-second auction; bids in the final 10 seconds extend it by 10 seconds.
-- Minimum bid is the starting price, then increments of at least 100 coins.
-- Highest bidder wins; no-bid Pokémon are UNSOLD.
-- The next Pokémon appears automatically after five seconds.
+1. On the Mac, run `npm install`.
+2. Run `npx cap add ios` (only once).
+3. Run `npx cap sync ios`.
+4. Run `npx cap open ios`.
+5. Configure signing in Xcode, test on an iPhone, then archive and distribute through TestFlight/App Store Connect.
+
+An iOS IPA cannot be built or signed on Windows or Android. App Store approval is not guaranteed; Apple reviews app functionality and quality.
 
 ## Important notes
 
-- PWA installation requires HTTPS when deployed (localhost is exempt for development).
-- Room state is in server memory and is cleared when the server restarts.
-- The service worker caches only the app shell; multiplayer and Pokémon artwork require internet.
-- This is an unofficial fan-made prototype, not affiliated with or endorsed by Nintendo, Game Freak, or The Pokémon Company. Pokémon names and artwork belong to their respective owners.
+- This ZIP is the source project and mobile wrapper configuration, not a compiled APK or IPA.
+- Do not commit signing keys, keystores, passwords, or Apple certificates to GitHub.
+- Render's free service can sleep when idle. A server restart currently clears in-memory rooms; persistent storage and reconnect recovery are needed before production use.
+- Pokémon names, artwork, and related marks belong to their respective rights holders. Review branding and distribution permissions before public commercial release.

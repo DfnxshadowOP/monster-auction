@@ -1,0 +1,18 @@
+{
+  "appId": "com.shadowhubs.monsterauction",
+  "appName": "Monster Auction",
+  "webDir": ".",
+  "server": {
+    "url": "https://monster-auction.onrender.com",
+    "cleartext": false,
+    "allowNavigation": [
+      "monster-auction.onrender.com"
+    ]
+  },
+  "android": {
+    "allowMixedContent": false
+  },
+  "ios": {
+    "contentInset": "automatic"
+  }
+}
